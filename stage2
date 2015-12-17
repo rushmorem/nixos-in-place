@@ -65,6 +65,20 @@ cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
       fsType = "$root_type";
     };
   };
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "yes";
+    passwordAuthentication = false;
+  };
+  users = {
+    mutableUsers = false;
+    extraUsers.root = {
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDpBFEiZdKcsCeZ5ZrTzI2tEY0zcpIIJ8c5WbbMoOFd3 Laptop"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ+/GoyARAfHiCiFf09TIJS5Z1tqVzsjwH3QX/vruVXx Controller"
+      ];
+    };
+  };
   $digitalocean_configs
 }
 EOF
