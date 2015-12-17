@@ -42,6 +42,8 @@ nix-env -i pcre
 ## Generate a base config
 nixos-generate-config --root /nixos
 
+source ./nixos-in-place/setup-network
+
 cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
 { config, pkgs, ... }:
 {
@@ -69,6 +71,15 @@ cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
     enable = true;
     permitRootLogin = "yes";
     passwordAuthentication = false;
+  };
+  networking = {
+    useDHCP = false;
+    defaultGateway = "$gateway";
+    interfaces = {
+      eth0.ip4 = [ { address = "$eth0_address"; prefixLength = $eth0_prefix_length; } ];
+      eth1.ip4 = [ { address = "$eth1_address"; prefixLength = $eth1_prefix_length; } ];
+    };
+    nameservers = [ "$ns1" "$ns1" ];
   };
   users = {
     extraUsers.root = {
