@@ -14,8 +14,9 @@ digitalocean=$5
 ## Enable networking
 log "Setting up chroot networking"
 cd host
-mkdir -p etc dev proc sys
+mkdir -p etc/network dev proc sys
 cp /etc/resolv.conf etc/external-resolv.conf
+cp /etc/network/interfaces etc/network/interfaces
 for fn in dev proc sys; do mount --bind /$fn $fn; done
 
 ## Patch the ISO for local chroot
