@@ -1,0 +1,13 @@
+#!/run/current-system/sw/bin/bash
+
+set -u
+
+## Inspect what we can
+echo "Inspecting eth0 and eth1..."
+interfaces=/etc/network/interfaces
+gateway=$(grep gateway $interfaces | awk '{print $2}')
+
+eth0_address=$(grep address $interfaces | awk '{print $2}' | head -1)
+
+eth1_address=$(grep address $interfaces | awk '{print $2}' | tail -1)
+echo "All set!"

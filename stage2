@@ -42,7 +42,7 @@ nix-env -i pcre
 ## Generate a base config
 nixos-generate-config --root /nixos
 
-source ./nixos-in-place/setup-network
+source ./nixos-in-place/query-network
 
 cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
 { config, pkgs, ... }:
@@ -76,10 +76,10 @@ cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
     useDHCP = false;
     defaultGateway = "$gateway";
     interfaces = {
-      eth0.ip4 = [ { address = "$eth0_address"; prefixLength = $eth0_prefix_length; } ];
-      eth1.ip4 = [ { address = "$eth1_address"; prefixLength = $eth1_prefix_length; } ];
+      eth0.ip4 = [ { address = "$eth0_address"; prefixLength = 26; } ];
+      eth1.ip4 = [ { address = "$eth1_address"; prefixLength = 29; } ];
     };
-    nameservers = [ "$ns1" "$ns1" ];
+    nameservers = [ "8.8.8.8" "8.8.4.4" ];
   };
   users = {
     extraUsers.root = {
