@@ -85,6 +85,8 @@ cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
     nameservers = [ "8.8.8.8" "8.8.4.4" ];
   };
   users = {
+    mutableUsers = false;
+
     extraUsers.root = {
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDpBFEiZdKcsCeZ5ZrTzI2tEY0zcpIIJ8c5WbbMoOFd3 Laptop"
