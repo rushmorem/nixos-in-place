@@ -75,10 +75,13 @@ cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
   networking = {
     useDHCP = false;
     defaultGateway = "$gateway";
-    interfaces = {
-      eth0.ip4 = [ { address = "$eth0_address"; prefixLength = 26; } ];
-      eth1.ip4 = [ { address = "$eth1_address"; prefixLength = 29; } ];
-    };
+    localCommands = 
+      ''
+	ip link set eth0 up
+        ip addr add $eth0_address/26 dev eth0
+	ip link set eth1 up
+        ip addr add $eth1_address/29 dev eth1
+      '';
     nameservers = [ "8.8.8.8" "8.8.4.4" ];
   };
   users = {
