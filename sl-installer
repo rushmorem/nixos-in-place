@@ -1,0 +1,8 @@
+#!/bin/bash
+
+apt-get update -y
+apt-get upgrade -y
+apt-get install -y git squashfs-tools
+git clone https://github.com/rushmorem/nixos-in-place.git
+cd ./nixos-in-place
+./install
