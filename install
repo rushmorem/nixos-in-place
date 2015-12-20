@@ -125,4 +125,5 @@ pushd $working_directory
 popd
 
 ## Installation is complete
-log "You can now reboot into NixOS..."
+log "Rebooting into NixOS..."
+reboot
