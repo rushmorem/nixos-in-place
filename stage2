@@ -75,27 +75,11 @@ cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
   networking = {
     useDHCP = false;
     defaultGateway = "$gateway";
-    bonds = {
-    	bond0 = {
-	  interfaces = [ "eth0" "eth2" ];
-	  miimon = 100;
-	  mode = "802.3ad";
-	  lacp_rate = "fast";
-	  xmit_hash_policy = "layer2+3";
-        };
-    	bond1 = {
-	  interfaces = [ "eth1" "eth3" ];
-	  miimon = 100;
-	  mode = "802.3ad";
-	  lacp_rate = "fast";
-	  xmit_hash_policy = "layer2+3";
-        };
-    };
     interfaces = {
-      bond0 = {
+      eth0 = {
         ip4 = [ { address = "$eth0_address"; prefixLength = 26; } ];
       };
-      bond1 = {
+      eno1 = {
         ip4 = [ { address = "$eth1_address"; prefixLength = 28; } ];
       };
     };
