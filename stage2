@@ -76,9 +76,6 @@ cat <<EOF > /nixos/etc/nixos/nixos-in-place.nix
     useDHCP = false;
     defaultGateway = "$gateway";
     interfaces = {
-      eth0 = {
-        ip4 = [ { address = "$eth0_address"; prefixLength = 26; } ];
-      };
       eno1 = {
         ip4 = [ { address = "$eth1_address"; prefixLength = 28; } ];
       };
