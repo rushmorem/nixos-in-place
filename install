@@ -125,5 +125,7 @@ pushd $working_directory
 popd
 
 ## Installation is complete
+#log "Rebooting into NixOS..."
+#reboot
 log "Shutting down..."
 poweroff
